@@ -1,0 +1,54 @@
+<div class="rack">
+  <h4>Rack {{ rack.number }}</h4>
+
+  <div class="sensors">
+
+    <div class="upsstrom">
+      <h5>
+        {% if rack.pdus.ups %}
+          <a href="{% url ipdevinfo-details-by-name rack.pdus.ups.netbox.sysname %}">
+            UPS
+          </a>
+        {% else %}
+          UPS
+        {% endif %}
+      </h5>
+
+      {% if rack.pdus.ups %}
+        <div class="apc-management">
+          {% for sensor in rack.pdus.ups.sensors %}
+            <div id='id_{{ sensor.id }}' class="apc-sensor"
+                 data-metric="{{ sensor.get_metric_name }}"></div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    {# .upsstrom #}
+
+
+    <div class="bystrom">
+      <h5>
+        {% if rack.pdus.by %}
+          <a href="{% url ipdevinfo-details-by-name rack.pdus.by.netbox.sysname %}">
+            BY
+          </a>
+        {% else %}
+          BY
+        {% endif %}
+      </h5>
+
+      {% if rack.pdus.by %}
+        <div class="apc-management">
+          {% for sensor in rack.pdus.by.sensors %}
+            <div id='id_{{ sensor.id }}' class="apc-sensor"
+                 data-metric="{{ sensor.get_metric_name }}"></div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    {# .bystrom #}
+
+    <div class="clearfix"></div>
+    <div class="notation">Ampere</div>
+  </div> {# .sensors #}
+</div> {# .rack #}

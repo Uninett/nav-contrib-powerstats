@@ -1,0 +1,83 @@
+{% load sensor %}
+
+{# IO display #}
+
+<div class="io-display">
+  {% with metrics=metric_mapping|get_value:up.sysname %}
+
+    {# Horizontal line #}
+    <div class="horizontal line"></div>
+
+    {# Vertical line #}
+    <div class="vertical line"></div>
+
+    {# Arrowhead #}
+    <div class="fa fa-caret-right"></div>
+
+    {# Input node #}
+    <div class="input node">
+      <h5>Input</h5>
+
+      <div>
+        <span>L1:</span>
+        <span data-metric="{{ metrics|get_value:'upsInputVoltage.1' }}"></span>
+        V
+      </div>
+      <div>
+        <span>L2:</span>
+        <span data-metric="{{ metrics|get_value:'upsInputVoltage.2' }}"></span>
+        V
+      </div>
+      <div>
+        <span>L3:</span>
+        <span data-metric="{{ metrics|get_value:'upsInputVoltage.3' }}"></span>
+        V
+      </div>
+    </div>
+
+    {# Battery node #}
+    <div class="battery node">
+      <h5>Battery</h5>
+
+      <div>
+        <span>Temp:</span>
+        <span data-metric="{{ metrics|get_value:'upsBatteryTemperature' }}"></span>
+        &deg;C
+      </div>
+      <div>
+        <span>Time:</span>
+        <span data-metric="{{ metrics|get_value:'upsEstimatedMinutesRemaining' }}"></span>
+        Min
+      </div>
+    </div>
+
+    {# Output node #}
+    <div class="node output">
+      <h5>Output</h5>
+
+      <div>
+        <span>L1:</span>
+        <span data-metric="{{ metrics|get_value:'upsOutputVoltage.1' }}"></span>
+        V
+        <span data-metric="{{ metrics|get_value:'upsOutputPower.1' }}"></span>
+        W
+      </div>
+      <div>
+        <span>L2:</span>
+        <span data-metric="{{ metrics|get_value:'upsOutputVoltage.2' }}"></span>
+        V
+        <span data-metric="{{ metrics|get_value:'upsOutputPower.2' }}"></span>
+        W
+      </div>
+      <div>
+        <span>L3:</span>
+        <span data-metric="{{ metrics|get_value:'upsOutputVoltage.3' }}"></span>
+        V
+        <span data-metric="{{ metrics|get_value:'upsOutputPower.3' }}"></span>
+        W
+      </div>
+    </div>
+
+
+  {% endwith %}
+</div> {# .iotables #}

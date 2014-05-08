@@ -1,0 +1,23 @@
+{% load sensor %}
+
+{# Gauge representing charge remaining in percent #}
+{% with sensor=up|get_sensor:'upsEstimatedChargeRemaining' %}
+  <div class="sensor left">
+    <h6 class="gauge-title">Charge Remaining</h6>
+    <div id="id_{{ sensor.id }}"
+         class="gauge-container charge"
+         data-metric="{{ sensor.get_metric_name }}"></div>
+  </div>
+{% endwith %}
+
+{# Gauge representing current load on phases/lines #}
+{% with sensors=up|get_sensors:'upsOutputPercentLoad' %}
+  {% for sensor in sensors %}
+    <div class="sensor left">
+      <h6 class="gauge-title">Load phase {{ forloop.counter }}</h6>
+      <div id="id_{{ sensor.id }}"
+           class="gauge-container left"
+           data-metric="{{ sensor.get_metric_name }}"></div>
+    </div>
+  {% endfor %}
+{% endwith %}
