@@ -5,9 +5,7 @@
 Install
 -------
 
-``python setup.py install``
-
-Watch the output to see where the templates go.
+``pip install hg+ssh://hg@bitbucket.org/bredal/nav-contrib-powerstats``
 
 Example config
 --------------
