@@ -26,7 +26,7 @@ setup(name='NAVPowerStatistics',
       url='https://bitbucket.org/bredal/nav-contrib-powerstats',
       packages=['navpowerstats'],
       data_files=[
-          ('nav_contrib_templates/navpowerstats', [
+          ('nav_contrib_templates/navpowerstats/info/room', [
               'templates/info/room/header_extras.html',
               'templates/info/room/power_figure.html',
               'templates/info/room/power_gauges.html',
