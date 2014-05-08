@@ -31,3 +31,5 @@ Example config
     from nav.django.settings import *
 
     TEMPLATE_DIRS += ('<template_path>', )
+
+- Reload Apache
