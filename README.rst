@@ -30,6 +30,7 @@ Example config
     LOCAL_SETTINGS = True
     from nav.django.settings import *
 
-    TEMPLATE_DIRS += ('<template_path>', )
+    # Verify this path with output from setup script
+    TEMPLATE_DIRS += ('/usr/local/nav_contrib_templates/navpowerstats', )
 
 - Reload Apache
