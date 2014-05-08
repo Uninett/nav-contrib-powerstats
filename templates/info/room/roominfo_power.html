@@ -23,9 +23,11 @@
 <h3>PDU load status</h3>
 
 <div id="pdu-container">
-  <small class="last-updated">
-    Last updated: <span></span>
-  </small>
+  <div>
+    <small class="last-updated">
+      Last updated: <span></span>
+    </small>
+  </div>
 
   {% for rack in racks %}
     {% include 'info/room/power_pdus.html' %}
