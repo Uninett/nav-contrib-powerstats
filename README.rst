@@ -7,6 +7,8 @@ Install
 
 ``python setup.py install``
 
+Watch the output to see where the templates go.
+
 Example config
 --------------
 
@@ -28,4 +30,4 @@ Example config
     LOCAL_SETTINGS = True
     from nav.django.settings import *
 
-    TEMPLATE_DIRS += ('/usr/local/lib/mordi/templates', )
+    TEMPLATE_DIRS += ('<template_path>', )
