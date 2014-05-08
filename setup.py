@@ -16,7 +16,7 @@
 #
 """Module comment"""
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='NAVPowerStatistics',
       version='0.1',
@@ -25,12 +25,5 @@ setup(name='NAVPowerStatistics',
       author_email='john.m.bredal@uninett.no',
       url='https://bitbucket.org/bredal/nav-contrib-powerstats',
       packages=['navpowerstats'],
-      data_files=[
-          ('nav_contrib_templates/navpowerstats/info/room', [
-              'templates/info/room/header_extras.html',
-              'templates/info/room/power_figure.html',
-              'templates/info/room/power_gauges.html',
-              'templates/info/room/power_pdus.html',
-              'templates/info/room/roominfo_power.html',
-          ])
-      ])
+      package_data={'navpowerstats': ['templates/*.html']},
+      include_package_data=True)
