@@ -11,7 +11,7 @@ Example config
 --------------
 
 - Go to NAV config directory
-- Create directory ''python'' if it does not exist
+- Create directory ``python`` if it does not exist, and enter it
 - Create file ``local_urls.py``::
 
     from django.conf.urls import url, patterns
@@ -19,7 +19,8 @@ Example config
 
     urlpatterns = patterns(
         '',
-        url(r'^ajax/open/powersensors/(?P<roomid>.+)', render_power_sensors, name='room-info-power'),
+        url(r'^ajax/open/powersensors/(?P<roomid>.+)', render_power_sensors,
+            name='room-info-power'),
     )
 
 - Create file ``local_settings.py``::
