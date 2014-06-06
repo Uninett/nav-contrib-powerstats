@@ -108,6 +108,8 @@ require([
         var $tabs = $('#infotabs');
         $tabs.on('tabscreate', function(){
             $('#infotabs').tabs('add', '{% url room-info-power room.id %}', 'Power Sensors');
+            /* A bug in jqueryui leads to two tabs created when dynamically adding tabs. */
+            $("#ui-tabs-1").hide();
         });
         $tabs.on('tabsload', function(event, ui){
             if (ui.index === $('.ui-tabs-nav li').length - 1) {
