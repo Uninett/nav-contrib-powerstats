@@ -94,6 +94,8 @@
 
 </style>
 
+{# I do not like this one bit #}
+{% if room.id %}
 <script>
 require([
     "plugins/linear_gauge",
@@ -272,3 +274,4 @@ require([
 });
 
 </script>
+{% endif %}
