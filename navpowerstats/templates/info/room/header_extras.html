@@ -226,11 +226,11 @@ require([
          */
 
         var metrics = createMetricList(objects),
-            url = getGraphiteUrl(metrics);
+            params = getGraphiteUrlParams(metrics);
         setInterval(function () {
-            update(url, objects, updateFunc, container);
+            update(params, objects, updateFunc, container);
         }, updateInterval);
-        update(url, objects, updateFunc, container);
+        update(params, objects, updateFunc, container);
     }
 
     function createMetricList(objects) {
@@ -244,18 +244,19 @@ require([
         return metrics;
     }
 
-    function getGraphiteUrl(metrics) {
-        /* Creates url to fetch all metrics from Graphite in one request */
-        var urlargs = [];
-        for (var i = 0, l = metrics.length; i < l; i++) {
-            urlargs.push('target=' + metrics[i]);
+    function getGraphiteUrlParams(metrics) {
+        /* Creates params to post request */
+        return {
+            'target': metrics,
+            'from': '-5min',
+            'until': 'now',
+            'format': 'json'
         }
-        return NAV.graphiteRenderUrl + '?from=-5min&until=now&format=json&' + urlargs.join('&');
     }
 
-    function update(url, objects, func, container) {
+    function update(parameters, objects, func, container) {
         /* Fetches json-data from url. Updates value using 'func' for each object */
-        $.getJSON(url, function (data) {
+        $.post(NAV.graphiteRenderUrl, parameters, function (data) {
             for (var i = 0, l = data.length; i < l; i++) {
                 var obj = data[i],
                     target = obj.target,  // Metric name
@@ -265,7 +266,7 @@ require([
                 objects[target][func](value);
             }
             if (container !== undefined) { container.trigger('custom_update'); }
-        });
+        }, 'json');
     }
 
 
