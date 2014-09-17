@@ -106,19 +106,27 @@ require([
 
     var updateInterval = 60 * 1000;
 
-    $(function(){
-        var $tabs = $('#infotabs');
-        $tabs.on('tabscreate', function(){
-            $('#infotabs').tabs('add', '{% url room-info-power room.id %}', 'Power Sensors');
-            /* A bug in jqueryui leads to two tabs created when dynamically adding tabs. */
-            $("#ui-tabs-1").hide();
-        });
-        $tabs.on('tabsload', function(event, ui){
-            if (ui.index === $('.ui-tabs-nav li').length - 1) {
-                initSuperPower();
-            }
-        });
-    });
+  $(function(){
+      var $tabs = $('#infotabs'),
+          initialized = false;
+      $tabs.on('tabscreate', function(){
+          addTab($tabs, '{% url room-info-power room.id %}', 'Power Sensors')
+      });
+      $tabs.on('tabsload', function(event, ui){
+          if (!initialized && ui.tab.prop('id') === 'powercontribtab') {
+              initSuperPower();
+              initialized = true;
+          }
+      });
+  });
+
+  function addTab(tabs, url, label) {
+      var tab = $('<li id="powercontribtab"><a href="' + url + '">' + label + '</a></li>'),
+          tabContent = $('<div id="tabPowerContrib"></div>');
+      tabs.find('.ui-tabs-nav').append(tab);
+      tabs.append(tabContent);
+      tabs.tabs('refresh');
+  }
 
     function initSuperPower() {
         console.log('Let the magic happen.');
