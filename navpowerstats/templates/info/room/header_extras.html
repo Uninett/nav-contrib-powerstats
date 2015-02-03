@@ -15,6 +15,7 @@
     #pdu-container .rack h4 {
       text-align: center; }
     #pdu-container .rack .sensors {
+      position: relative;
       background-color: gainsboro;
       border: 1px solid #aaaaaa;
       overflow: hidden;
@@ -26,6 +27,19 @@
       #pdu-container .rack .sensors .bystrom {
         float: right;
         min-width: 42px; }
+      #pdu-container .rack .sensors .stromsum_upper {
+          top: 90px;
+      }
+      #pdu-container .rack .sensors .stromsum_lower {
+          top: 240px;
+      }
+      #pdu-container .rack .sensors .stromsum_upper,
+      #pdu-container .rack .sensors .stromsum_lower {
+        font-size: 0.9rem;
+        color: #666;
+        position: absolute;
+        right: 20px;
+        left: 20px; }
       #pdu-container .rack .sensors .notation {
         color: #666;
         font-size: 0.8em;
@@ -110,6 +124,7 @@ require([
       var $tabs = $('#infotabs'),
           initialized = false;
       $tabs.on('tabscreate', function(){
+          console.log('Tabs are created');
           addTab($tabs, '{% url room-info-power room.id %}', 'Power Sensors')
       });
       $tabs.on('tabsload', function(event, ui){
@@ -121,6 +136,7 @@ require([
   });
 
   function addTab(tabs, url, label) {
+      console.log('Adding tab to jquery tabs');
       var tab = $('<li id="powercontribtab"><a href="' + url + '">' + label + '</a></li>'),
           tabContent = $('<div id="tabPowerContrib"></div>');
       tabs.find('.ui-tabs-nav').append(tab);
@@ -155,6 +171,21 @@ require([
 
         $container.on('custom_update', function () {
             $container.find('.last-updated span').html(moment().format('DD.MM, HH:mm:ss'));
+
+            /* Add the sum of the gauges to the display */
+            $('.rack').each(function(index, rack) {
+                var $rack = $(rack);
+                var upsUpperValue = $rack.find('.upsstrom svg:first').data('currentvalue');
+                var byUpperValue = $rack.find('.bystrom svg:first').data('currentvalue');
+                var sumUpper = +upsUpperValue + +byUpperValue;
+
+                var upsLowerValue = $rack.find('.upsstrom svg:last').data('currentvalue');
+                var byLowerValue = $rack.find('.bystrom svg:last').data('currentvalue');
+                var sumLower = +upsLowerValue + +byLowerValue;
+
+                $rack.find('.stromsum_upper .currentvalue').text(sumUpper.toFixed(1));
+                $rack.find('.stromsum_lower .currentvalue').text(sumLower.toFixed(1));
+            });
         });
     }
 

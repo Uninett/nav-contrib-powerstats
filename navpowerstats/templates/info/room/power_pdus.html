@@ -25,6 +25,17 @@
     </div>
     {# .upsstrom #}
 
+    {% if rack.pdus.ups and rack.pdus.by %}
+      <div class="stromsum_upper">
+        <div>&#8721;</div>
+        <div class="currentvalue"></div>
+      </div>
+
+      <div class="stromsum_lower">
+        <div>&#8721;</div>
+        <div class="currentvalue"></div>
+      </div>
+    {% endif %}
 
     <div class="bystrom">
       <h5>
