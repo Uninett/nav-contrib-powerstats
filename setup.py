@@ -19,11 +19,11 @@
 from setuptools import setup
 
 setup(name='NAVPowerStatistics',
-      version='0.1',
+      version='0.2',
       description='NAV Power Statistics for Rooms',
       author='John-Magne Bredal',
       author_email='john.m.bredal@uninett.no',
       url='https://bitbucket.org/bredal/nav-contrib-powerstats',
       packages=['navpowerstats'],
-      package_data={'navpowerstats': ['templates/*.html']},
+      package_data={'navpowerstats': ['templates/*.html', 'static/*.js', 'static/*.css']},
       include_package_data=True)
