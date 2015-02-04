@@ -174,12 +174,13 @@
                  /* Add the sum of the gauges to the display */
                  $('.rack').each(function(index, rack) {
                      var $rack = $(rack);
-                     var upsUpperValue = $rack.find('.upsstrom svg:first').data('currentvalue');
-                     var byUpperValue = $rack.find('.bystrom svg:first').data('currentvalue');
+
+                     var upsUpperValue = $rack.find('.upsstrom svg:first').attr('data-currentvalue');
+                     var byUpperValue = $rack.find('.bystrom svg:first').attr('data-currentvalue');
                      var sumUpper = +upsUpperValue + +byUpperValue;
 
-                     var upsLowerValue = $rack.find('.upsstrom svg:last').data('currentvalue');
-                     var byLowerValue = $rack.find('.bystrom svg:last').data('currentvalue');
+                     var upsLowerValue = $rack.find('.upsstrom svg:last').attr('data-currentvalue');
+                     var byLowerValue = $rack.find('.bystrom svg:last').attr('data-currentvalue');
                      var sumLower = +upsLowerValue + +byLowerValue;
 
                      $rack.find('.stromsum_upper .currentvalue').text(sumUpper.toFixed(1));
