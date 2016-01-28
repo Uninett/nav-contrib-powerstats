@@ -1,7 +1,7 @@
 {# I do not like this one bit #}
 {% if room.id %}
   <script>
-   NAV.urls.room_info_power = '{% url room-info-power room.id %}';
+   NAV.urls.room_info_power = "{% url 'room-info-power' room.id %}";
   </script>
   <link href="{{ STATIC_URL }}navpowerstats/css/navpowerstats.css" rel="stylesheet">
   <script src="{{ STATIC_URL }}navpowerstats/js/navpowerstats.js"></script>
