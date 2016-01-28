@@ -30,4 +30,9 @@ Example config
         'navpowerstats',
     )
 
+- Run collectstatic::
+
+    cd python/nav/django
+    python ./manage.py collectstatic
+
 - Reload Apache
