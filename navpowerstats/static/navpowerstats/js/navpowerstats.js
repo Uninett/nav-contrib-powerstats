@@ -48,7 +48,7 @@ require([
         $container.find('.apc-sensor').each(function (index, element) {
             var metric = $(element).attr('data-metric');
             pdus[metric] = new LinearGauge({
-                node: element,
+                nodeId: element.id,
                 precision: 1,
                 threshold: 7
             });
@@ -90,7 +90,7 @@ require([
             }
 
             gauges[$element.attr('data-metric')] = new JohnGauge({
-                nodeId: element.id,
+                node: element,
                 radius: 70,
                 symbol: '%',
                 invertScale: invert
