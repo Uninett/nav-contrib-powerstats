@@ -36,3 +36,13 @@ Example config
     python ./manage.py collectstatic
 
 - Reload Apache
+
+
+Developement
+------------
+
+- hg clone <dir>
+- cd <dir>
+- python setup.py sdist
+- pip install dist/NAVPowerStatistics-0.x.tar.gz
+- Copy css and js files to static dir
