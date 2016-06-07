@@ -12,7 +12,7 @@ require([
         initialized = false;
         $tabs.on('tabscreate', function(){
             console.log('Tabs are created');
-            addTab($tabs, NAV.urls.room_info_power, 'Power Sensors')
+            addTab($tabs, NAV.urls.room_info_power, 'Power Sensors');
         });
         $tabs.on('tabsload', function(event, ui){
             if (!initialized && ui.tab.prop('id') === 'powercontribtab') {
@@ -178,7 +178,7 @@ require([
             'from': '-5min',
             'until': 'now',
             'format': 'json'
-        }
+        };
     }
 
     function update(parameters, objects, func, container) {
@@ -207,6 +207,7 @@ require([
                 return value;
             }
         } while (count <= retries);
+        console.log('Did not find value on ' + retries + ' retries');
         return null;
     }
 
