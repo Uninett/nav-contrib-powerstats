@@ -126,7 +126,7 @@ require([
 
             /* Highlight when input power is below a threshold */
             $box.find('[data-metric]').each(function (index, element) {
-                if (element.innerHTML < 200) {
+                if (isNumeric(element.innerHTML) && +element.innerHTML < 200) {
                     problem = true;
                 }
             });
@@ -199,6 +199,7 @@ require([
 
     function getFirstValue(datapoints, origRetries) {
         var retries = +origRetries ? +origRetries : 0;
+        retries = retries >= datapoints.length ? datapoints.length - 1 : retries;
         var count = 0;
         var value = null;
         do {
@@ -209,6 +210,10 @@ require([
         } while (count <= retries);
         console.log('Did not find value on ' + retries + ' retries');
         return null;
+    }
+
+    function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
 
