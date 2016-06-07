@@ -19,7 +19,7 @@
 from setuptools import setup
 
 setup(name='NAVPowerStatistics',
-      version='0.3',
+      version='0.4',
       description='NAV Power Statistics for Rooms',
       author='John-Magne Bredal',
       author_email='john.m.bredal@uninett.no',
