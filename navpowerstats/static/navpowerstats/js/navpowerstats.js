@@ -184,20 +184,33 @@ require([
     function update(parameters, objects, func, container) {
         /* Fetches json-data from url. Updates value using 'func' for each object */
         $.post(NAV.graphiteRenderUrl, parameters, function (data) {
+            // How many points backwards to go before giving up on data
+            var retries = 3;
             for (var i = 0, l = data.length; i < l; i++) {
                 var obj = data[i],
-                target = obj.target,  // Metric name
-                datapoints = obj.datapoints,
-                value = datapoints[datapoints.length - 1][0] ||
-                    datapoints[datapoints.length - 2][0];
+                    target = obj.target,  // Metric name
+                    datapoints = obj.datapoints;
+                var value = getFirstValue(datapoints, retries);
                 objects[target][func](value);
             }
             if (container !== undefined) { container.trigger('custom_update'); }
         }, 'json');
     }
 
+    function getFirstValue(datapoints, origRetries) {
+        var retries = +origRetries ? +origRetries : 0;
+        var count = 0;
+        var value = null;
+        do {
+            value = datapoints[datapoints.length - ++count][0];
+            if (value != null) {
+                return value;
+            }
+        } while (count <= retries);
+        return null;
+    }
+
 
     return initSuperPower;
 
 });
-
