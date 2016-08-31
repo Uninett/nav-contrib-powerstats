@@ -6,7 +6,7 @@
     <div class="upsstrom">
       <h5>
         {% if rack.pdus.ups %}
-          <a href="{% url 'ipdevinfo-details-by-name' rack.pdus.ups.netbox.sysname %}">
+          <a href="{% url 'ipdevinfo-details-by-id' rack.pdus.ups.netbox.pk %}">
             UPS
           </a>
         {% else %}
@@ -40,7 +40,7 @@
     <div class="bystrom">
       <h5>
         {% if rack.pdus.by %}
-          <a href="{% url 'ipdevinfo-details-by-name' rack.pdus.by.netbox.sysname %}">
+          <a href="{% url 'ipdevinfo-details-by-id' rack.pdus.by.netbox.pk %}">
             BY
           </a>
         {% else %}

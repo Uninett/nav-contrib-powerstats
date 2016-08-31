@@ -1,7 +1,13 @@
-import re
+"""Controller functions for power sensor rendering
+
+pdu's are required to have a certain naming standard. They need to have the
+category 'POWER' and the sysname must start with 'pdu-'
+"""
+
 from collections import defaultdict
 from nav.models.manage import Room
 from django.shortcuts import get_object_or_404, render
+from .utils import get_rack_info
 
 
 def render_power_sensors(request, roomid):
@@ -34,7 +40,6 @@ def group_by_rack(netboxes):
 
         racks[rack_number][rack_type] = {
             'netbox': netbox,
-            'shortname': get_shortname(netbox.sysname),
             'sensors': sensors
         }
 
@@ -48,24 +53,12 @@ def group_by_rack(netboxes):
     return results
 
 
-def get_rack_info(sysname):
-    """Finds rack number from sysname of a PDU"""
-    number, index = re.search(r'pdu-r(\d+)(\w)', sysname).groups()
-    return int(number), index
-
-
-def get_shortname(sysname):
-    """Custom formatting of shortname for a pdu given a sysname"""
-    return re.sub(r'pdu-(\w+)\..*', r'\1', sysname)
-
-
-def get_metrics(ups):
+def get_metrics(upses):
     """Creates internal_name -> metric_name mapping for all sensors"""
     mapping = {}
-    for up in ups:
+    for ups in upses:
         metrics = {}
-        for sensor in up.sensor_set.all():
+        for sensor in ups.sensor_set.all():
             metrics[sensor.internal_name] = sensor.get_metric_name()
-        mapping[up.sysname] = metrics
+        mapping[ups.sysname] = metrics
     return mapping
-
