@@ -1,9 +1,8 @@
 require([
     "plugins/linear_gauge",
     "plugins/gauge",
-    "libs/moment.min",
-    'libs/jquery'
-], function (LinearGauge, JohnGauge) {
+    "moment",
+], function (LinearGauge, JohnGauge, moment) {
 
     var updateInterval = 60 * 1000;
 
