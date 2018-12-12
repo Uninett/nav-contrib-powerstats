@@ -5,7 +5,7 @@
 Install
 -------
 
-``pip install hg+ssh://hg@bitbucket.org/bredal/nav-contrib-powerstats``
+``pip install git+https://github.com/Uninett/nav-contrib-powerstats.git``
 
 Example config
 --------------
